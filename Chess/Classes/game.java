@@ -1,5 +1,4 @@
 package Classes;
-import java.util.ArrayList;
 /**
  * @author George Francis
  * @version 0.00
@@ -20,7 +19,7 @@ import java.util.ArrayList;
  * 
  */
 public class game{
-    //board is an ArrayList containing the pieces. Will worry about clashing positions later (checkPositions method)
+    //board is a 2D array containing spots. Each spot can contain a piece.
     private spot[][] Board;
 
     public game(){
@@ -28,6 +27,13 @@ public class game{
     }
 
     public void fillBoard(){
+        for(int i=0; i<9; i++){
+            for(int j=0; j<9; j++){
+                spot tempSpot = new spot(i,j);
+                Board[i][j] = tempSpot;
+            }
+        }
+        
     }
 
     public void gameStart(){

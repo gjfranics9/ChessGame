@@ -1,22 +1,34 @@
 package Classes;
 /**
  * @author George Francis
- * @version 0.00
+ * @version 0.01
+ */
+/*
+ * spot is now the main class where pieces occur to avoid storing the coordinates multiple times.
+ * Pieces individually do not know where they are and the movement of pieces is spots trading their positions.
+ * spot should be the only class where x and y coordinates are stored
+ * 
+ * 
  */
 public class spot {
-    int x;
-    int y;
-    piece Piece;
+    private int spotX;
+    private int spotY;
+    private piece Piece;
     
-    public spot(int x, int y){
-        this.x = x;
-        this.y = y;
-        Piece = null;
+    public spot(int spotX, int spotY){
+        this.spotX = spotX;
+        this.spotY = spotY;
+        this.Piece = null;
     }
 
-    public void occupyPiece(piece Piece){
-
+    public void insertPiece(piece Piece){
+        this.Piece = Piece;
     }
+
+    public piece getPiece(){
+        return this.Piece;
+    }
+
 
 
 
