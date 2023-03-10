@@ -1,7 +1,10 @@
 package Classes;
+import java.awt.*;
+
+import javax.swing.JFrame;
 /**
  * @author George Francis
- * @version 0.00
+ * @version 0.15
  * 
  */
 /*
@@ -23,9 +26,11 @@ public class game{
     private spot[][] Board;
 
     public game(){
+        Board = new spot[9][9];
         fillBoard();
     }
 
+    //Fills the board with all the spots (8x8 standard chess board)
     public void fillBoard(){
         for(int i=0; i<9; i++){
             for(int j=0; j<9; j++){
@@ -33,15 +38,28 @@ public class game{
                 Board[i][j] = tempSpot;
             }
         }
-        
+    }
+
+    public spot[][] getBoard(){
+        return Board;
     }
 
     public void gameStart(){
-        fillBoard();
+        //initialise screen
+        int w = 800;
+        int h = 800;
+        JFrame f = new JFrame();
+        canvas myCanvas = new canvas(800,800,Board);
+        f.setSize(w,h);
+        f.setTitle("Chess");
+        f.add(myCanvas);
+        f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        f.setVisible(true);
     }
 
     public static void main(String args[]){
         game Game = new game();
         Game.gameStart();
     }
+
 }

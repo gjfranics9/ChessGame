@@ -1,7 +1,10 @@
 package Classes;
+import java.awt.*;
+import java.awt.geom.*;
+
 /**
  * @author George Francis
- * @version 0.01
+ * @version 0.02
  */
 /*
  * spot is now the main class where pieces occur to avoid storing the coordinates multiple times.
@@ -15,21 +18,43 @@ public class spot {
     private int spotY;
     private piece Piece;
     
-    public spot(int spotX, int spotY){
-        this.spotX = spotX;
-        this.spotY = spotY;
-        this.Piece = null;
+    public spot(int X, int Y){
+        spotX = X;
+        spotY = Y;
+        Piece = null;
     }
 
-    public void insertPiece(piece Piece){
-        this.Piece = Piece;
+    //Places a piece on this square
+    public void insertPiece(piece insertedPiece){
+        Piece = insertedPiece;
     }
 
+    //Gets the piece object that this square holds
     public piece getPiece(){
-        return this.Piece;
+        return Piece;
     }
 
+    //receives a piece from another square and takes it
+    public void receivePiece(spot otherSpot){
+        insertPiece(otherSpot.getPiece());
+        otherSpot.insertPiece(null);
+    }
+    
 
+    public int getScreenX(){
+        return 100*(spotX-1);
+    }
 
+    public int getScreenY(){
+        return 100*(spotY-1);
+    }
+
+    public void drawSelf(Graphics2D g2d){
+        int screenX = this.getScreenX();
+        int screenY = this.getScreenY();
+        Rectangle2D.Double r = new Rectangle2D.Double(screenX, screenY, 100, 100);
+        g2d.setColor(Color.BLACK);
+        g2d.fill(r);
+    }
 
 }

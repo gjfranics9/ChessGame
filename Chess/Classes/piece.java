@@ -15,16 +15,11 @@ public abstract class piece {
 
     private Boolean white;
     //pieces could perhaps not hold their own x and y coordinate and instead x and y coordinates can be taken from the spot the are on
-    public piece(Boolean white){
-       this.white = white; 
+    public piece(Boolean isWhite){
+       white = isWhite; 
     }
 
     public Boolean isValid(int fromX, int fromY, int toY, int toX){
-        if(toX-fromX == 0 & toY-fromY == 0){
-            return false;
-        }
-        else{
-            return true;
-        }
+        return !(toX-fromX == 0 & toY-fromY == 0);
     }
 }
