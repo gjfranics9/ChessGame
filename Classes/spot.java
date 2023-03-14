@@ -1,79 +1,114 @@
 package Classes;
-import java.awt.*;
-import java.awt.geom.*;
+
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
+import java.awt.Point;
 
 /**
- * @author George Francis
- * @version 0.10
- */
-/*
- * spot is now the main class where pieces occur to avoid storing the coordinates multiple times.
- * Pieces individually do not know where they are and the movement of pieces is spots trading their positions.
- * spot should be the only class where x and y coordinates are stored
- * 
- * 
+ * Represents a spot on the board where a piece can be placed.
  */
 public class spot {
-    private int spotX;
-    private int spotY;
+    private final Point position;
     private piece Piece;
     private board Board;
     
-    public spot(int X, int Y){
-        spotX = X;
-        spotY = Y;
+    /**
+     * Creates a new spot with the specified position.
+     *
+     * @param x The x coordinate of the spot.
+     * @param y The y coordinate of the spot.
+     */
+    public spot(int x, int y) {
+        position = new Point(x, y);
         Piece = null;
     }
 
-    //Places a piece on this square
-    public void insertPiece(piece insertedPiece){
+    /**
+     * Places a piece on this spot.
+     *
+     * @param insertedPiece The piece to place on this spot.
+     */
+    public void insertPiece(piece insertedPiece) {
         Piece = insertedPiece;
     }
 
-    //Gets the piece object that this square holds
-    public piece getPiece(){
+    /**
+     * Returns the piece object that is on this spot.
+     *
+     * @return The piece on this spot, or null if there is no piece.
+     */
+    public piece getPiece() {
         return Piece;
     }
 
-    //sets the board the spot is in
-    public void setBoard(board boardInput){
+    /**
+     * Sets the board that this spot is on.
+     *
+     * @param boardInput The board that this spot is on.
+     */
+    public void setBoard(board boardInput) {
         Board = boardInput;
     }
-    //Returns the board it is in
-    public board getBoard(){
+
+    /**
+     * Returns the board that this spot is on.
+     *
+     * @return The board that this spot is on.
+     */
+    public board getBoard() {
         return Board;
     }
 
-    //receives a piece from another square and takes it
-    public void receivePiece(spot otherSpot){
+    /**
+     * Receives a piece from another spot and takes it.
+     *
+     * @param otherSpot The spot from which to receive the piece.
+     */
+    public void receivePiece(spot otherSpot) {
         insertPiece(otherSpot.getPiece());
         otherSpot.insertPiece(null);
     }
-    
 
-    public int getScreenX(){
-        return 100*(spotX-1);
+    /**
+     * Returns the x coordinate of this spot on the screen.
+     *
+     * @return The x coordinate of this spot on the screen.
+     */
+    public int getScreenX() {
+        return 100 * (position.x - 1);
     }
 
-    public int getScreenY(){
-        return 100*(spotY-1);
+    /**
+     * Returns the y coordinate of this spot on the screen.
+     *
+     * @return The y coordinate of this spot on the screen.
+     */
+    public int getScreenY() {
+        return 100 * (position.y - 1);
     }
 
-    public void drawSelf(Graphics2D g2d){
-        int screenX = this.getScreenX();
-        int screenY = this.getScreenY();
+    /**
+     * Draws this spot on the specified graphics context.
+     *
+     * @param g2d The graphics context on which to draw this spot.
+     */
+    public void drawSelf(Graphics2D g2d) {
+        int screenX = getScreenX();
+        int screenY = getScreenY();
         Rectangle2D.Double r = new Rectangle2D.Double(screenX, screenY, 100, 100);
-        g2d.setColor(Color.BLACK);
-        for(int row=0; row<9; row++){
-            for(int col=0; col<9; col++){
-                if(spotY % 2 == 1 && spotX % 2 == 0){
-                    g2d.fill(r);
-                }
-                else if(spotY% 2 == 0 && spotX % 2 == 1){
-                    g2d.fill(r);
-                }
-            }
-
+        boolean isBlack = (position.y % 2 == 1 && position.x % 2 == 0) || (position.y % 2 == 0 && position.x % 2 == 1);
+        if(isBlack){
+            g2d.setColor(Color.BLACK);
+            g2d.fill(r);
         }
+        /*
+        else{
+            g2d.setColor(new Color(150, 111, 51));
+            g2d.fill(r);
+        }
+        */
+        
     }
 }
+

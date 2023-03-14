@@ -22,7 +22,7 @@ import javax.swing.JFrame;
  * 
  */
 public class game{
-    board Board;
+    private final board Board;
 
     //Board is created and all the squares are placed onto board
     public game(){
@@ -35,13 +35,13 @@ public class game{
         return Board;
     }
 
-    //Initialises canvas
+    //Initialises canvas which is where everything will be drawn on
     public void gameStart(){
         //initialise screen
         int w = 800;
         int h = 800;
         JFrame f = new JFrame();
-        canvas myCanvas = new canvas(800,800,Board);
+        canvas myCanvas = new canvas(w,h,Board);
         f.setSize(w,h);
         f.setTitle("Chess");
         f.add(myCanvas);
@@ -50,8 +50,7 @@ public class game{
     }
 
     public static void main(String args[]){
-        game Game = new game();
-        Game.gameStart();
+        new game().gameStart();
     }
 
 }

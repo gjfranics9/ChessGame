@@ -18,7 +18,15 @@ public abstract class piece {
     public piece(Boolean isWhite){
        white = isWhite; 
     }
-
+    /**
+     * Returns valid move (for default piece move is only invalid if it hasnt moved somewhere)
+     * 
+     * @param fromX
+     * @param fromY
+     * @param toY
+     * @param toX
+     * @return
+     */
     public Boolean isValid(int fromX, int fromY, int toY, int toX){
         return !(toX-fromX == 0 & toY-fromY == 0);
     }

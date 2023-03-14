@@ -17,9 +17,9 @@ class canvas extends JComponent {
         Board = inputBoard;
     }
 
+    @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         Board.drawBoard(g2d);
-
         }
 }
